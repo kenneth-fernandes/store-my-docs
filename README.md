@@ -1,7 +1,6 @@
 # 📄 Store My Docs - Online Document Storage Web App
 A simple document storage web application where users can upload, view, delete, and manage documents securely online. Built using Flask/FastAPI for backend, React for frontend, and AWS (EC2, RDS, S3) for hosting & storage.
 
----
 ## 🚀 Features (Work in Progress 🚧)
 - User Registration & Login (JWT Authentication) (Pending Implementation 🚧)
 - Upload, View & Delete Documents (Backend in Progress 🚧)
@@ -10,7 +9,6 @@ A simple document storage web application where users can upload, view, delete, 
 - REST API for Backend (Under Development 🚧)
 - React-based Frontend (Yet to Start 🚧)
 
----
 ## 🛠️ Tech Stack
 |  **Component** |     **Technology**     |       **Status**      |
 |:--------------:|:----------------------:|:---------------------:|
@@ -20,8 +18,6 @@ A simple document storage web application where users can upload, view, delete, 
 | Storage        | AWS S3                 | 🚧 Pending Integration |
 | Hosting        | AWS EC2 (Ubuntu)       | 🚧 Pending Deployment  |
 | Authentication | JWT (JSON Web Token)   | 🚧 Not Implemented     |
-
----
 
 ## 📂 Project Structure (Work in Progress 🚧)
 ```
@@ -41,7 +37,6 @@ store-my-docs/
 │── README.md                # Project documentation ✔ Updated
 ```
 
----
 ## 🔧 Setup Instructions (Work in Progress 🚧)
 🚀 We are currently setting up the backend in stages. Full instructions will be added once completed.
 
@@ -73,7 +68,6 @@ npm install
 npm start
 ```
 
----
 ## 🌍 Deployment (AWS) (Work in Progress 🚧)
 We will deploy the application after local testing is complete.
 
@@ -84,14 +78,11 @@ We will deploy the application after local testing is complete.
 - ☑️ Nginx & Gunicorn (Pending Configuration 🚧)
 - ☑️ GitHub Actions for CI/CD (Planned, Not Started 🚧)
 
----
-
 ## 📌 Future Scope
 ### 🚀 Planned Features (Not Started Yet 🚧)
 - 📄 File Preview: Preview PDFs before downloading
 - 🔗 File Sharing: Generate shareable links
 - 📂 Folder Organization: Create folders to manage documents
 
----
 ## ©️ Credits
 - Markdown tables: https://www.tablesgenerator.com/markdown_tables
