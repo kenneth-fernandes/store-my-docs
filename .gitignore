@@ -1,4 +1,14 @@
+# Ignore Python cache & virtual environment
+backend/__pycache__/
+backend/venv/
 backend/.env
-__pycache__/
+
+# Ignore Node.js dependencies
 frontend/node_modules/
+
+# Ignore system files
+.DS_Store
 *.log
+
+# AWS related files
+backend/aws/
