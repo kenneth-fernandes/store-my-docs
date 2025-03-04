@@ -2,6 +2,7 @@
 backend/__pycache__/
 backend/venv/
 backend/.env
+backend/store-my-docs-backend-python.code-workspace
 
 # Ignore Node.js dependencies
 frontend/node_modules/
