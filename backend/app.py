@@ -1,6 +1,10 @@
 from flask import Flask
+from routes.document import document_bp
 
 app = Flask(__name__)
+
+# Registering the routes using Blueprint
+app.register_blueprint(document_bp)
 
 @app.route('/')
 def home():
