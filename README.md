@@ -1,6 +1,10 @@
 # 📄 ☁ Store My Docs - Online Document Storage Web App
 A simple document storage web application where users can upload, view, delete, and manage documents securely online. Built using Flask/FastAPI for backend, React for frontend, and AWS (EC2, RDS, S3) for hosting & storage.
 
+## 🏗️ System Architecture
+![System Architecture](https://github.com/kenneth-fernandes/store-my-docs/blob/main/backend/docs/system-architecture.png)
+
+The diagram above represents the full system design, showing how the frontend, backend, and AWS services interact.
 ## 🚀 Features (Work in Progress 🚧)
 |                   **Feature**                  |              **Status**              |
 |:----------------------------------------------:|:------------------------------------:|
