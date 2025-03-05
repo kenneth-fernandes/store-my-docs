@@ -1,5 +1,7 @@
 # Ignore Python cache & virtual environment
 backend/__pycache__/
+backend/models/__pycache__/
+backend/routes/__pycache__/
 backend/venv/
 backend/.env
 backend/store-my-docs-backend-python.code-workspace
