@@ -35,14 +35,15 @@ class User:
 
 
     @staticmethod
-    def find_user_by_email(email):
+    def find_user_by_username_or_email(identifier):
         conn = connect_db()
         if not conn:
             return None
 
         try:
             with conn.cursor() as cur:
-                cur.execute("SELECT * FROM users WHERE email = %s", (email,))
+                cur.execute("SELECT * FROM users WHERE "
+                            "username = %s OR email = %s", (identifier, identifier))
                 row = cur.fetchone()
             conn.close()
             return User(*row) if row else None
