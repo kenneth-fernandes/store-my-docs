@@ -4,11 +4,11 @@ from models.user import User
 from flask import Blueprint, jsonify, request
 import datetime
 
-user_bp = Blueprint("users", __name__)
+auth_bp = Blueprint("auth", __name__)
 bcrypt = Bcrypt()
 
 # Register user
-@user_bp.route("/users", methods=["POST"])
+@auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
     username = data["username"]
@@ -25,7 +25,7 @@ def register():
     return jsonify({"message": "User registered!", "user_id": user_id}), 201
 
 # User login
-@user_bp.route("/users", methods=["POST"])
+@auth_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     identifier = data["identifier"]
