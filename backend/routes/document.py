@@ -1,6 +1,7 @@
+import json
 from flask import Blueprint, request, jsonify
 from models.document import Document
-from flask_jwt_extended import jwt_required, get_jwt
+from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
 
 document_bp = Blueprint("documents", __name__)
 
@@ -12,8 +13,9 @@ def is_admin(user):
 @document_bp.route("/documents", methods=["GET"])
 @jwt_required()
 def get_user_documents():
-    data = get_jwt()
-    user_id = data.get("sub")
+    identity_str = get_jwt_identity()
+    user = json.loads(identity_str)
+    user_id = user["user_id"]
 
     docs = Document.get_documents_by_user(user_id)
     if len(docs) == 0:
@@ -26,8 +28,9 @@ def get_user_documents():
 @document_bp.route("/documents/<int:doc_id>", methods=["GET"])
 @jwt_required()
 def get_document_by_id(doc_id):
-    data = get_jwt()
-    user_id = data.get("sub")
+    identity_str = get_jwt_identity()
+    user = json.loads(identity_str)
+    user_id = user["user_id"]
 
     doc = Document.get_document_by_id(doc_id, user_id)
     if doc:
@@ -39,15 +42,16 @@ def get_document_by_id(doc_id):
 @document_bp.route("/documents", methods=["POST"])
 @jwt_required()
 def upload_document():
-    data = get_jwt()
-    user_id = data.get("sub")
+    identity_str = get_jwt_identity()
+    user = json.loads(identity_str)
+    user_id = user["user_id"]
 
     data = request.get_json()
     filename =  data["filename"]
     file_url = data["file_url"]
 
-    if not filename or not file_url:
-        return jsonify({"error": "Missing filename or file_url"}), 400
+    if not filename or not file_url or not user_id:
+        return jsonify({"error": "Missing filename or file_url or user_id"}), 400
 
     doc_id = Document.insert_document(filename, file_url, user_id)
     if doc_id is None:
@@ -59,8 +63,12 @@ def upload_document():
 @document_bp.route("/documents/<int:doc_id>", methods=["DELETE"])
 @jwt_required()
 def delete_document(doc_id):
-    data = get_jwt()
-    user_id = data.get("sub")
+    identity_str = get_jwt_identity()
+    user = json.loads(identity_str)
+    user_id = user["user_id"]
+
+    if not doc_id or not user_id:
+        return jsonify({"error": "Missing doc_id or user_id"}), 400
 
     success = Document.delete_document(doc_id, user_id)
     if success:

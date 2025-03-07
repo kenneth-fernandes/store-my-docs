@@ -3,6 +3,7 @@ from flask_jwt_extended import create_access_token
 from models.user import User
 from flask import Blueprint, jsonify, request
 import datetime
+import json
 
 auth_bp = Blueprint("auth", __name__)
 bcrypt = Bcrypt()
@@ -41,7 +42,8 @@ def login():
     if not bcrypt.check_password_hash(user.password_hash, password):
         return jsonify({"error": "User authentication failed!"}), 401
 
-    access_token = create_access_token(identity=str(user.id),
-                                   additional_claims={"role": user.role},
-                                   expires_delta=datetime.timedelta(days=1))
+    user_data = json.dumps({"user_id": user.id, "user_role" : user.role})
+
+    access_token = create_access_token(identity=user_data, expires_delta=datetime.timedelta(days=1))
+
     return jsonify({"message" : "Login successful!", "role": user.role, "access_token" : access_token}), 200
