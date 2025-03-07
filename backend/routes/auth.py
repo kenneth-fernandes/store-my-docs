@@ -41,5 +41,7 @@ def login():
     if not bcrypt.check_password_hash(user.password_hash, password):
         return jsonify({"error": "User authentication failed!"}), 401
 
-    access_token = create_access_token(identity=user.id, expires_delta=datetime.timedelta(days=1))
+    access_token = create_access_token(identity=str(user.id),
+                                   additional_claims={"role": user.role},
+                                   expires_delta=datetime.timedelta(days=1))
     return jsonify({"message" : "Login successful!", "role": user.role, "access_token" : access_token}), 200
