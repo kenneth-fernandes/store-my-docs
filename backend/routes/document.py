@@ -1,7 +1,8 @@
 import json
 from flask import Blueprint, request, jsonify
 from models.document import Document
-from flask_jwt_extended import jwt_required, get_jwt, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from extensions import limiter
 
 document_bp = Blueprint("documents", __name__)
 
@@ -12,6 +13,7 @@ def is_admin(user):
 # Get all documents
 @document_bp.route("/documents", methods=["GET"])
 @jwt_required()
+@limiter.limit("30 per minute")
 def get_user_documents():
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
@@ -27,6 +29,7 @@ def get_user_documents():
 # Get a specific document
 @document_bp.route("/documents/<int:doc_id>", methods=["GET"])
 @jwt_required()
+@limiter.limit("30 per minute")
 def get_document_by_id(doc_id):
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
@@ -41,6 +44,7 @@ def get_document_by_id(doc_id):
 # Upload a document
 @document_bp.route("/documents", methods=["POST"])
 @jwt_required()
+@limiter.limit("10 per day")
 def upload_document():
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
@@ -62,6 +66,7 @@ def upload_document():
 # Delete a document
 @document_bp.route("/documents/<int:doc_id>", methods=["DELETE"])
 @jwt_required()
+@limiter.limit("5 per hour")
 def delete_document(doc_id):
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)

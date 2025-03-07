@@ -1,5 +1,6 @@
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token
+from extensions import limiter
 from models.user import User
 from flask import Blueprint, jsonify, request
 import datetime
@@ -10,6 +11,7 @@ bcrypt = Bcrypt()
 
 # Register user
 @auth_bp.route("/register", methods=["POST"])
+@limiter.limit("5 per hour")
 def register():
     data = request.get_json()
     username = data["username"]
@@ -27,6 +29,7 @@ def register():
 
 # User login
 @auth_bp.route("/login", methods=["POST"])
+@limiter.limit("10 per hour")
 def login():
     data = request.get_json()
     identifier = data["identifier"]
