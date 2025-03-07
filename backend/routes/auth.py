@@ -42,4 +42,4 @@ def login():
         return jsonify({"error": "User authentication failed!"}), 401
 
     access_token = create_access_token(identity=user.id, expires_delta=datetime.timedelta(days=1))
-    return jsonify({"message" : "Login successful!", "access_token" : access_token}), 200
+    return jsonify({"message" : "Login successful!", "role": user.role, "access_token" : access_token}), 200
