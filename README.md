@@ -34,7 +34,7 @@ store-my-docs/
 │   ├── app.py               # Main backend application ✅ Implemented
 │   ├── db.py                # Database connection setup ✅ Implemented
 │   ├── config.py            # Configuration settings ✅ Implemented
-│   ├── .env                 # Environment variables (DO NOT COMMIT) 🚧 Pending AWS Setup
+│   ├── .env                 # Environment variables (Present locally) 🚧 Pending AWS Setup
 │── frontend/                # Frontend (React) 🚧 Not Started
 │   ├── src/                 # Main frontend files 🚧 Not Started
 │   ├── public/              # Static assets 🚧 Not Started
