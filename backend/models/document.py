@@ -56,10 +56,10 @@ class Document:
             with conn.cursor() as cur:
                 cur.execute("INSERT INTO documents (filename, file_url) "
                             "VALUES (%s, %s) RETURNING doc_id;", (filename, file_url))
-                doc_id = cur.fetchone()[0]
+                doc_id = cur.fetchone()
             conn.commit()
             conn.close()
-            return doc_id
+            return doc_id[0] if doc_id else None
         except Exception as e:
             print("Failed to insert document:", e)
             if conn:
