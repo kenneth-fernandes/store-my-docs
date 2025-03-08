@@ -6,45 +6,47 @@ A simple document storage web application where users can upload, view, delete, 
 
 The diagram above represents the full system design, showing how the frontend, backend, and AWS services interact.
 ## 🚀 Features (Work in Progress 🚧)
-|                   **Feature**                  |              **Status**              |
-|:----------------------------------------------:|:------------------------------------:|
-| User Registration & Login (JWT Authentication) | 🚧 Pending Implementation             |
-| Upload, View & Delete Documents                | ✅ Backend API Implemented            |
-| Secure Document Storage using AWS S3           | 🚧 Pending Integration                |
-| PostgreSQL Database (AWS RDS)                  | 🚧 Pending Setup (Local DB Working ✅) |
-| REST API for Backend                           | ✅ Implemented (Locally Tested)       |
-| React-based Frontend                           | 🚧 Yet to Start                       |
+| Feature                                        | Status                                                   |
+|------------------------------------------------|----------------------------------------------------------|
+| User Registration & Login (JWT Authentication) | ✅ Implemented & Secure with RBAC                         |
+| Upload, View & Delete Documents                | ✅ Backend API Implemented & Ownership Restrictions Added |
+| Secure Document Storage using AWS S3           | 🚧 Pending Integration                                    |
+| PostgreSQL Database (AWS RDS)                  | 🚧 Pending Setup (Local DB Working ✅)                     |
+| REST API for Backend                           | ✅ Implemented & Secure (Rate Limiting Added)             |
+| React-based Frontend                           | 🚧 Yet to Start                                           |
 
 ## 🛠️ Tech Stack
 | **Component**  | **Technology**         | **Status**                         |
 |----------------|------------------------|------------------------------------|
-| Frontend       | React (JS)             | 🚧 Not Started                      |
+| Frontend       | React (JS)             | 🚧 Not Started                     |
 | Backend        | Flask/FastAPI (Python) | ✅ API Implemented & Tested Locally |
-| Database       | PostgreSQL (AWS RDS)   | 🚧 Pending AWS Setup (Local DB ✅)   |
-| Storage        | AWS S3                 | 🚧 Pending Integration              |
-| Hosting        | AWS EC2 (Ubuntu)       | 🚧 Pending Deployment               |
-| Authentication | JWT (JSON Web Token)   | 🚧 Not Implemented                  |
+| Database       | PostgreSQL (AWS RDS)   | 🚧 Pending AWS Setup (Local DB ✅)  |
+| Storage        | AWS S3                 | 🚧 Pending Integration             |
+| Hosting        | AWS EC2 (Ubuntu)       | 🚧 Pending Deployment              |
+| Authentication | JWT (JSON Web Token)   | ✅ Implemented with RBAC            |
 
 ## 📂 Project Structure (Work in Progress 🚧)
 ```
 store-my-docs/
 │── backend/                 # Backend (Flask/FastAPI) ✅ Implemented
-│   ├── routes/              # API route handlers ✅ Implemented
+│   ├── routes/              # API route handlers ✅ Implemented & Secured
 │   ├── models/              # Database models ✅ Implemented
 │   ├── app.py               # Main backend application ✅ Implemented
 │   ├── db.py                # Database connection setup ✅ Implemented
 │   ├── config.py            # Configuration settings ✅ Implemented
-│   ├── .env                 # Environment variables (Present locally) 🚧 Pending AWS Setup
+│   ├── .env                 # Environment variables 🚧 Pending AWS Setup
+│   ├── .env                 # Centralizes and initializes Flask extensions ✅ Implemented
 │── frontend/                # Frontend (React) 🚧 Not Started
 │   ├── src/                 # Main frontend files 🚧 Not Started
 │   ├── public/              # Static assets 🚧 Not Started
 │   ├── package.json         # Frontend dependencies 🚧 Not Started
 │── .gitignore               # Ignore unnecessary files ✅ Updated
 │── README.md                # Project documentation ✅ Updated
+
 ```
 
 ## 🔧 Setup Instructions (Work in Progress 🚧)
-🚀 We are currently setting up the backend in stages. Full instructions will be added once completed.
+🚀 We are currently setting up the backend in stages. Once local testing is complete, we will proceed with AWS deployment.
 
 ### 1️⃣ Clone the Repository
 ```bash
@@ -67,6 +69,7 @@ pip install -r requirements.txt
 - ✅ Virtual Environment Created
 - ✅ Database (Local PostgreSQL) Connected
 - ✅ API Routes Implemented & Tested
+- ✅ Security Added (Rate Limiting, RBAC, JWT, Security Headers)
 - 🚧 Pending AWS RDS Setup
 
 ### 3️⃣ Frontend Setup (React)
