@@ -1,3 +1,4 @@
+from flasgger import Swagger
 from flask_limiter import Limiter
 from flask_jwt_extended import JWTManager
 from flask_talisman import Talisman
@@ -10,3 +11,4 @@ limiter = Limiter(get_remote_address, default_limits=["200 per day", "50 per hou
 jwt = JWTManager()
 talisman = Talisman()
 cors = CORS()
+swagger = Swagger()
