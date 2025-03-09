@@ -1,3 +1,4 @@
+from flasgger import swag_from
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token
 from extensions import limiter
@@ -5,6 +6,7 @@ from models.user import User
 from flask import Blueprint, jsonify, request
 import datetime
 import json
+from config import SWAGGER_API_CONFIG
 
 auth_bp = Blueprint("auth", __name__)
 bcrypt = Bcrypt()
@@ -12,6 +14,7 @@ bcrypt = Bcrypt()
 # Register user
 @auth_bp.route("/register", methods=["POST"])
 @limiter.limit("5 per hour")
+@swag_from(SWAGGER_API_CONFIG["auth"]["register"])
 def register():
     data = request.get_json()
     username = data["username"]
@@ -30,6 +33,7 @@ def register():
 # User login
 @auth_bp.route("/login", methods=["POST"])
 @limiter.limit("10 per hour")
+@swag_from(SWAGGER_API_CONFIG["auth"]["login"])
 def login():
     data = request.get_json()
     identifier = data["identifier"]

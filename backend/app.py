@@ -1,8 +1,10 @@
-from flask import Flask
+from flasgger import swag_from
+from flask import Flask, jsonify
 from config import JWT_CONFIG
-from extensions import talisman, cors, limiter, jwt
+from extensions import talisman, cors, limiter, jwt, swagger
 from routes.document import document_bp
 from routes.auth import auth_bp
+from config import SWAGGER_API_CONFIG, SWAGGER, CONTENT_SECURITY_POLICY
 
 app = Flask(__name__)
 
@@ -18,9 +20,18 @@ jwt.init_app(app)
 # Rate Limiting (Max Requests Per User)
 limiter.init_app(app)
 # Security Headers (XSS, CSP, Clickjacking Protection)
-talisman.init_app(app)
+talisman.init_app(app, content_security_policy=CONTENT_SECURITY_POLICY)
 # Enable CORS for frontend access
-cors.init_app(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+cors.init_app(app, resources={r"/api/*": {"origins": ["http://localhost:3000"]}})
+
+# Swagger Configurations
+swagger.init_app(app)
+
+@app.route("/apidocs/swagger.json")
+@swag_from(SWAGGER_API_CONFIG["app"]["swagger_json"])
+def swagger_json():
+    return jsonify(SWAGGER)
+
 
 @app.route('/')
 @limiter.limit("10 per minute")

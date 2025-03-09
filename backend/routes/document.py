@@ -1,8 +1,10 @@
 import json
+from flasgger import swag_from
 from flask import Blueprint, request, jsonify
 from models.document import Document
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from extensions import limiter
+from config import SWAGGER_API_CONFIG
 
 document_bp = Blueprint("documents", __name__)
 
@@ -14,6 +16,7 @@ def is_admin(user):
 @document_bp.route("/documents", methods=["GET"])
 @jwt_required()
 @limiter.limit("30 per minute")
+@swag_from(SWAGGER_API_CONFIG["documents"]["get_user_documents"])
 def get_user_documents():
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
@@ -30,6 +33,7 @@ def get_user_documents():
 @document_bp.route("/documents/<int:doc_id>", methods=["GET"])
 @jwt_required()
 @limiter.limit("30 per minute")
+@swag_from(SWAGGER_API_CONFIG["documents"]["get_document_by_id"])
 def get_document_by_id(doc_id):
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
@@ -45,6 +49,7 @@ def get_document_by_id(doc_id):
 @document_bp.route("/documents", methods=["POST"])
 @jwt_required()
 @limiter.limit("10 per day")
+@swag_from(SWAGGER_API_CONFIG["documents"]["upload_document"])
 def upload_document():
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
@@ -67,6 +72,7 @@ def upload_document():
 @document_bp.route("/documents/<int:doc_id>", methods=["DELETE"])
 @jwt_required()
 @limiter.limit("5 per hour")
+@swag_from(SWAGGER_API_CONFIG["documents"]["delete_document"])
 def delete_document(doc_id):
     identity_str = get_jwt_identity()
     user = json.loads(identity_str)
