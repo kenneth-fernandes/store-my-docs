@@ -16,26 +16,26 @@ The diagram above represents the full system design, showing how the frontend, b
 | React-based Frontend                           | 🚧 Yet to Start                                           |
 
 ## 🛠️ Tech Stack
-| **Component**  | **Technology**         | **Status**                         |
-|----------------|------------------------|------------------------------------|
-| Frontend       | React (JS)             | 🚧 Not Started                     |
-| Backend        | Flask/FastAPI (Python) | ✅ API Implemented & Tested Locally |
-| Database       | PostgreSQL (AWS RDS)   | 🚧 Pending AWS Setup (Local DB ✅)  |
-| Storage        | AWS S3                 | 🚧 Pending Integration             |
-| Hosting        | AWS EC2 (Ubuntu)       | 🚧 Pending Deployment              |
-| Authentication | JWT (JSON Web Token)   | ✅ Implemented with RBAC            |
+| **Component**  | **Technology**       | **Status**                         |
+|----------------|----------------------|------------------------------------|
+| Frontend       | React (JS)           | 🚧 Not Started                     |
+| Backend        | Flask (Python)       | ✅ API Implemented & Tested Locally |
+| Database       | PostgreSQL (AWS RDS) | 🚧 Pending AWS Setup (Local DB ✅)  |
+| Storage        | AWS S3               | 🚧 Pending Integration             |
+| Hosting        | AWS EC2 (Ubuntu)     | 🚧 Pending Deployment              |
+| Authentication | JWT (JSON Web Token) | ✅ Implemented with RBAC            |
 
 ## 📂 Project Structure (Work in Progress 🚧)
 ```
 store-my-docs/
-│── backend/                 # Backend (Flask/FastAPI) ✅ Implemented
+│── backend/                 # Backend (Flask) ✅ Implemented
 │   ├── routes/              # API route handlers ✅ Implemented & Secured
 │   ├── models/              # Database models ✅ Implemented
 │   ├── app.py               # Main backend application ✅ Implemented
 │   ├── db.py                # Database connection setup ✅ Implemented
 │   ├── config.py            # Configuration settings ✅ Implemented
+│   ├── extensions.py        # Centralizes and initializes Flask extensions ✅ Implemented
 │   ├── .env                 # Environment variables 🚧 Pending AWS Setup
-│   ├── .env                 # Centralizes and initializes Flask extensions ✅ Implemented
 │── frontend/                # Frontend (React) 🚧 Not Started
 │   ├── src/                 # Main frontend files 🚧 Not Started
 │   ├── public/              # Static assets 🚧 Not Started
@@ -72,7 +72,17 @@ pip install -r requirements.txt
 - ✅ Security Added (Rate Limiting, RBAC, JWT, Security Headers)
 - 🚧 Pending AWS RDS Setup
 
-### 3️⃣ Frontend Setup (React)
+### 3️⃣ Test API Locally
+- 📌 Start Backend
+```bash
+python backend/app.py
+```
+
+- 📌 Test API Endpoints Using Swagger
+- 📍 Open: http://127.0.0.1:5001/apidocs/
+- ✅ All API routes are documented here!
+
+### 4️⃣ Frontend Setup (React)
 - 🚧 Not Started Yet
 ```bash
 cd frontend
