@@ -86,7 +86,7 @@ class Document:
             with conn.cursor() as cur:
                 cur.execute("INSERT INTO documents (filename, file_url, owner_id) "
                             "VALUES (%s, %s, %s) RETURNING doc_id;", (filename, file_url, owner_id))
-                doc_id = cur.fetchone()
+                doc_id = cur.fetchone()[0]
             conn.commit()
             conn.close()
             logging.info(f"Document uploaded (doc_id: {doc_id}) by user_id: {owner_id}")
