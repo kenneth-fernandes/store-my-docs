@@ -1,4 +1,6 @@
 import json
+import logging
+
 from flasgger import swag_from
 from flask import Blueprint, request, jsonify
 from models.document import Document
@@ -22,10 +24,14 @@ def get_user_documents():
     user = json.loads(identity_str)
     user_id = user["user_id"]
 
+    logging.info(f"Fetching documents for user_id: {user_id}")
+
     docs = Document.get_documents_by_user(user_id)
     if len(docs) == 0:
+        logging.warning(f"No documents found for user_id: {user_id}")
         return jsonify({"error": "Documents not found or unauthorized"}), 404
 
+    logging.info(f"Fetched {len(docs)} documents for user_id: {user_id}")
     return jsonify(docs), 200
 
 
@@ -39,9 +45,14 @@ def get_document_by_id(doc_id):
     user = json.loads(identity_str)
     user_id = user["user_id"]
 
+    logging.info(f"Fetching document ID: {doc_id} for user_id: {user_id}")
+
     doc = Document.get_document_by_id(doc_id, user_id)
     if doc:
+        logging.info(f"Document ID: {doc_id} retrieved successfully for user_id: {user_id}")
         return jsonify(doc), 200
+
+    logging.warning(f"Document ID: {doc_id} not found or unauthorized for user_id: {user_id}")
     return jsonify({"error": "Document not found or unauthorized"}), 404
 
 
@@ -59,12 +70,18 @@ def upload_document():
     filename =  data["filename"]
     file_url = data["file_url"]
 
-    if not filename or not file_url or not user_id:
-        return jsonify({"error": "Missing filename or file_url or user_id"}), 400
+    if not filename or not file_url:
+        logging.warning(f"Failed upload attempt: Missing filename or file_url (user_id: {user_id})")
+        return jsonify({"error": "Missing filename or file_url"}), 400
+
+    logging.info(f"Uploading document '{filename}' for user_id: {user_id}")
 
     doc_id = Document.insert_document(filename, file_url, user_id)
     if doc_id is None:
+        logging.error(f"Failed to upload document '{filename}' for user_id: {user_id}")
         return jsonify({"error": "Failed to upload document"}), 500
+
+    logging.info(f"Document '{filename}' uploaded successfully with doc_id: {doc_id} (user_id: {user_id})")
     return jsonify({"message": "Document uploaded!", "doc_id": doc_id}), 201
 
 
@@ -78,10 +95,12 @@ def delete_document(doc_id):
     user = json.loads(identity_str)
     user_id = user["user_id"]
 
-    if not doc_id or not user_id:
-        return jsonify({"error": "Missing doc_id or user_id"}), 400
+    logging.info(f"Attempting to delete document ID: {doc_id} by user_id: {user_id}")
 
     success = Document.delete_document(doc_id, user_id)
     if success:
+        logging.info(f"Document ID: {doc_id} deleted successfully by user_id: {user_id}")
         return jsonify({"message": "Document deleted!"}), 200
+
+    logging.warning(f"Failed to delete document ID: {doc_id}. Not found or unauthorized for user_id: {user_id}")
     return jsonify({"error": "Document not found or unauthorized"}), 404
