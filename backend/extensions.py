@@ -1,3 +1,5 @@
+import logging
+
 from flasgger import Swagger
 from flask_limiter import Limiter
 from flask_jwt_extended import JWTManager
@@ -12,3 +14,13 @@ jwt = JWTManager()
 talisman = Talisman()
 cors = CORS()
 swagger = Swagger()
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("backend.log"),
+        logging.StreamHandler()
+    ]
+)
