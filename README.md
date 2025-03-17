@@ -13,17 +13,18 @@ The diagram above represents the full system design, showing how the frontend, b
 | Secure Document Storage using AWS S3           | 🚧 Pending Integration                                    |
 | PostgreSQL Database (AWS RDS)                  | 🚧 Pending Setup (Local DB Working ✅)                     |
 | REST API for Backend                           | ✅ Implemented & Secure (Rate Limiting Added)             |
-| React-based Frontend                           | 🚧 Yet to Start                                           |
+| React-based Frontend (Login & Register)        | ✅ Implemented & Tested Locally                           |
+| Dashboard UI (Upload/View/Delete Docs)         | 🚧 In Progress                                            |
 
 ## 🛠️ Tech Stack
-| **Component**  | **Technology**       | **Status**                         |
-|----------------|----------------------|------------------------------------|
-| Frontend       | React (JS)           | 🚧 Not Started                     |
-| Backend        | Flask (Python)       | ✅ API Implemented & Tested Locally |
-| Database       | PostgreSQL (AWS RDS) | 🚧 Pending AWS Setup (Local DB ✅)  |
-| Storage        | AWS S3               | 🚧 Pending Integration             |
-| Hosting        | AWS EC2 (Ubuntu)     | 🚧 Pending Deployment              |
-| Authentication | JWT (JSON Web Token) | ✅ Implemented with RBAC            |
+| Component | Technology           | Status                             |
+|-----------|----------------------|------------------------------------|
+| Frontend  | React (JS)           | ✅ Authentication UI Implemented    |
+| Backend   | Flask (Python)       | ✅ API Implemented & Tested Locally |
+| Database  | PostgreSQL (AWS RDS) | 🚧 Pending AWS Setup (Local DB ✅)   |
+| Storage   | AWS S3               | 🚧 Pending Integration              |
+| Hosting   | AWS EC2 (Ubuntu)     | 🚧 Pending Deployment               |
+| Auth      | JWT (JSON Web Token) | ✅ Implemented with RBAC            |
 
 ## 📂 Project Structure (Work in Progress 🚧)
 ```
@@ -35,19 +36,24 @@ store-my-docs/
 │   ├── app.py               # Main backend application ✅ Implemented
 │   ├── db.py                # Database connection setup ✅ Implemented
 │   ├── config.py            # Configuration settings ✅ Implemented
-│   ├── extensions.py        # Centralizes and initializes Flask extensions ✅ Implemented
+│   ├── extensions.py        # Centralized Flask extensions ✅ Implemented
 │   ├── .env                 # Environment variables 🚧 Pending AWS Setup
-│── frontend/                # Frontend (React) 🚧 Not Started
-│   ├── src/                 # Main frontend files 🚧 Not Started
+│── frontend/                # Frontend (React) ✅ In Progress
+│   ├── src/                 # Main frontend files ✅ Implemented
+│   │   ├── pages/           # React Pages (Login, Register, Dashboard) ✅ Implemented
+│   │   ├── api/             # API calls to backend ✅ Implemented
+│   │   ├── context/         # Global Authentication State ✅ Implemented
+│   │   ├── components/      # Reusable UI Components ✅ Implemented
 │   ├── public/              # Static assets 🚧 Not Started
-│   ├── package.json         # Frontend dependencies 🚧 Not Started
+│   ├── package.json         # Frontend dependencies ✅ Implemented
 │── .gitignore               # Ignore unnecessary files ✅ Updated
 │── README.md                # Project documentation ✅ Updated
+
 
 ```
 
 ## 🔧 Setup Instructions (Work in Progress 🚧)
-🚀 We are currently setting up the backend in stages. Once local testing is complete, we will proceed with AWS deployment.
+🚀 We are currently setting up the frontend in stages.  Once local testing is complete, we will proceed with AWS deployment.
 
 ### 1️⃣ Clone the Repository
 ```bash
@@ -57,7 +63,7 @@ cd store-my-docs
 
 - ✅ Repository Setup Done
 - ✅ Backend Implemented & Tested Locally
-- 🚧 Frontend Setup Not Started Yet
+- ✅ Frontend Authentication Implemented
 
 ### 2️⃣ Backend Setup (Flask/FastAPI)
 ```bash
@@ -104,12 +110,18 @@ tests/test_app.py . [100%]
 ✅ Unit tests ensure the backend is functioning correctly before deployment.
 
 ### 5️⃣ Frontend Setup (React)
-- 🚧 Not Started Yet
+Now that authentication UI is ready, run:
 ```bash
 cd frontend
 npm install
 npm start
 ```
+📌 Go to http://localhost:3000/
+- ✅ Register new users
+- ✅ Login with credentials
+- ✅ Redirects to Dashboard after login
+- ✅ Logout button works correctly
+
 ---
 ## 🌍 Deployment (AWS) (Work in Progress 🚧)
 We will deploy the application after local testing is complete.
@@ -129,6 +141,17 @@ We will deploy the application after local testing is complete.
 - 📄 File Preview: Preview PDFs before downloading
 - 🔗 File Sharing: Generate shareable links
 - 📂 Folder Organization: Create folders to manage documents
+- 🔑 OAuth Integration: Allow login via Google & GitHub 
+- 📊 Admin Dashboard: Track user activity and storage usage
+---
+
+### 📌 Next Steps
+| Task                                               | Status               |
+|----------------------------------------------------|----------------------|
+| 🚀 Implement Dashboard UI (Upload/View/Delete Docs) | 🔜 Next Step          |
+| 🎨 Finalize Frontend Design & UX                    | 🔜 Upcoming           |
+| 🔗 Connect Frontend with Backend APIs               | 🔜 After Dashboard UI |
+| 🔄 Automate CI/CD Pipeline (GitHub Actions)         | 🔜 Planned            |
 ---
 ## ©️ Credits
 - Markdown tables: https://www.tablesgenerator.com/markdown_tables
