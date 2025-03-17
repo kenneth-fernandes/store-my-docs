@@ -11,8 +11,8 @@ from config import SWAGGER_API_CONFIG, SWAGGER, CONTENT_SECURITY_POLICY
 app = Flask(__name__)
 
 # Registering the routes using Blueprint
-app.register_blueprint(document_bp)
-app.register_blueprint(auth_bp)
+app.register_blueprint(document_bp, url_prefix="/api")
+app.register_blueprint(auth_bp, url_prefix="/api")
 
 # JWT Secret key
 app.config["JWT_SECRET_KEY"] = JWT_CONFIG["secret"]
