@@ -31,6 +31,7 @@ store-my-docs/
 │── backend/                 # Backend (Flask) ✅ Implemented
 │   ├── routes/              # API route handlers ✅ Implemented & Secured
 │   ├── models/              # Database models ✅ Implemented
+│   ├── tests/               # Unit & Integration Tests ✅ Implemented
 │   ├── app.py               # Main backend application ✅ Implemented
 │   ├── db.py                # Database connection setup ✅ Implemented
 │   ├── config.py            # Configuration settings ✅ Implemented
@@ -82,14 +83,34 @@ python backend/app.py
 - 📍 Open: http://127.0.0.1:5001/apidocs/
 - ✅ All API routes are documented here!
 
-### 4️⃣ Frontend Setup (React)
+### 4️⃣ Run Unit & Integration Tests
+Run all unit tests:
+``` bash
+pytest tests/
+```
+📌 Expected Output:
+```bash
+======== test session starts ========
+collected 10 items
+
+tests/test_auth.py .... [100%]
+tests/test_documents.py .... [100%]
+tests/test_models.py .... [100%]
+tests/test_db.py . [100%]
+tests/test_app.py . [100%]
+
+======== All tests passed! ========
+```
+✅ Unit tests ensure the backend is functioning correctly before deployment.
+
+### 5️⃣ Frontend Setup (React)
 - 🚧 Not Started Yet
 ```bash
 cd frontend
 npm install
 npm start
 ```
-
+---
 ## 🌍 Deployment (AWS) (Work in Progress 🚧)
 We will deploy the application after local testing is complete.
 
@@ -102,12 +123,13 @@ We will deploy the application after local testing is complete.
 | ☑️ Nginx & Gunicorn              | 🚧 Pending Configuration  |
 | ☑️ GitHub Actions for CI/CD      | 🚧 Planned, Not Started   |
 
+---
 ## 📌 Future Scope
 ### 🚀 Planned Features (Not Started Yet 🚧)
 - 📄 File Preview: Preview PDFs before downloading
 - 🔗 File Sharing: Generate shareable links
 - 📂 Folder Organization: Create folders to manage documents
-
+---
 ## ©️ Credits
 - Markdown tables: https://www.tablesgenerator.com/markdown_tables
 - Deploy flask app with nginx using gunicorn and supervisor - https://medium.com/ymedialabs-innovation/deploy-flask-app-with-nginx-using-gunicorn-and-supervisor-d7a93aa07c18
